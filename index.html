@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine:200,300,400,500,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia:200,300,400,500">
 
-    <img src="./background.jpeg" class="wrapper"> <!-- horizontal order -->
+    <img src="./background.jpeg" class="wrapper" id="wrapper"> <!-- horizontal order -->
 
         <div class="mainSection" id="mainSection">
             
@@ -54,27 +54,30 @@
 
         <div class="explanationPanel" id="explanationPanel">
             <img src="./background.jpeg" class="expimg">
+            <div class="expwrap">
             <p class="explanationText">
                 Basics<br>
                 1) Earn Blessings from The Blockchain Maiden. <br>
-                a) You can earn Blessings  by contributing, participating or engaging with The Blockchain Maiden. You will be rewarded with either Bronze, Gold or Silver depending on how well you please your Goddess. <br>
+                You can earn Blessings  by contributing, participating or engaging with The Blockchain Maiden. You will be rewarded with either Bronze, Gold or Silver depending on how well you please your Goddess. <br>
                 2) Mint them. <br>
-                a) This can only be done during specific minting periods, which will always be made clear well before that time. The amount you are able to mint for each tier is displayed by ‘Available To Mint’ and will either be 1 or 0 for each minting period. You must be on that specific NFTs tier page to be able to mint it. For example, you must be on the Bronze Blessing page to be able to mint the Bronze NFT. <br>
+                This can only be done during specific minting periods, which will always be made clear well before that time. The amount you are able to mint for each tier is displayed by ‘Available To Mint’ and will either be 1 or 0 for each minting period. You must be on that specific NFTs tier page to be able to mint it. For example, you must be on the Bronze Blessing page to be able to mint the Bronze NFT. <br>
                 3) Burn them for points, or sell them. <br>
-                a) Here you have a choice to burn them for points or sell them for a profit. Points are redeemed for further offerings from The Blockchain Maiden. You can burn or sell them at any time, but once they are burned they are locked into the wallet you burned them on. Gold, Silver & Bronze Blessings are worth 4, 2 & 1 respectively. The total amount of points you have accumulated is displayed by ‘Total Collected Points’ on the Homepage. You must be on that specific NFTs tier page to be able to burn it. For example, you must be on the Bronze Blessing page to be able to burn the Bronze NFT. <br>
+                Here you have a choice to burn them for points or sell them for a profit. Points are redeemed for further offerings from The Blockchain Maiden. You can burn or sell them at any time, but once they are burned they are locked into the wallet you burned them on. Gold, Silver & Bronze Blessings are worth 4, 2 & 1 respectively. The total amount of points you have accumulated is displayed by ‘Total Collected Points’ on the Homepage. You must be on that specific NFTs tier page to be able to burn it. For example, you must be on the Bronze Blessing page to be able to burn the Bronze NFT. <br>
                 4) Redeem the points for further Blockchain Maiden offerings. <br>
-                a) You can redeem these points for further offerings that will be made clear and explained well in advance of the event. <br>
-                
+                You can redeem these points for further offerings that will be made clear and explained well in advance of the event. <br>
+                <br><br>
                 <br> Terms <br>
                 Currently Owned: The number of each tier of NFT currently held in your wallet. <br>
                 Available To Mint: The number of each tier of NFT you are able to mint during the specific minting period. It will either be 1 or 0. If you have earned Blessing NFTs on multiple wallets, then you can earn more than 1 of each in a single mint period by switching wallets. <br>
                 Previously Burned: The number of each tier of NFT you have previously burned using the current wallet. <br>
                 Total Collected Points: The total number of accumulated points acquired from burning ALL tiers of NFT within the current wallet. <br>
                 Previously Spent Points: The total number of previously redeemed points using the current wallet. <br>
-                
+                <br><br>
                 <br>FAQ<br>
-                Q: I contributed to The Blockchain Maiden but can’t see my reward in ‘Available To Mint’. A: You most likely didn’t post your wallet address along with the submission. With the volume of Blessing NFTs being rewarded, it is impossible for us to chase up every contributor to get their wallet address. 
+                Q: I contributed to The Blockchain Maiden but can’t see my reward in ‘Available To Mint’. <br>
+                A: You most likely didn’t post your wallet address along with the submission. With the volume of Blessing NFTs being rewarded, it is impossible for us to chase up every contributor to get their wallet address. <br>
                 </p>
+                </div>
         </div>
 
         <div class="blessingPanel" id="blessingPanel">
@@ -139,6 +142,8 @@
 
             opacity: 45%;
         }
+        
+        
 
         .counterAmount1{
             position: absolute;
@@ -197,17 +202,18 @@
             display: flex;
             align-items: center;
             flex-direction: column;
+
+            visibility:hidden;
         }
 
         .heading{
-            position: relative;
-            width: 50%;
+            position: absolute;
 
             margin-block-start: 0.2em;
             margin-block-end: 0em;
 
             font-family: Tangerine;
-            font-size: 3.5em;
+            font-size: 5em;
             font-weight: 700;
             color: black;
 
@@ -338,7 +344,7 @@
             position: absolute;
 
             width: 100%;
-            height: 12.5%;
+            height: 20%;
             bottom: 0%;
 
             display: flex;
@@ -446,7 +452,7 @@
         .ExplanationButton{
             position: absolute;
             top: 5px;
-            right: 10px;
+            left: 10px;
 
             text-align: center;
             display: flex;
@@ -464,18 +470,22 @@
             width: 200px;
             height: 60px;
 
+            z-index: 10;
+
             cursor: pointer;
         }
 
         .ExplanationExit{
             position: absolute;
             top: 5px;
-            right: 10px;
+            left: 10px;
 
             width: 60px;
             height: 60px;
 
             cursor: pointer;
+
+            z-index: 10;
 
             visibility: hidden;
         }
@@ -486,18 +496,42 @@
             align-items: center;
 
             position: absolute;
+            height: 100%;
+            width: 100%;
+
+            background-color: black;
+            opacity: 100%;
+
+            visibility: hidden;
+        }
+
+        .expwrap{
+            display: flex;
+            justify-content: top;
+            align-items: baseline;
+
+            position: absolute;
             height: 80%;
             width: 75%;
 
             left: 12.5%;
             top: 10%;
 
-            border: 1px solid black;
+            overflow-y: auto;
 
-            visibility: hidden;
+            z-index: 10;
+
+            border: 1px solid black;
         }
 
         .explanationText{
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+
             font-family: Sofia;
             font-size: 1em;
             font-weight: 200;
@@ -729,7 +763,6 @@
             document.getElementById("blessingPanel").style.visibility = 'visible';
             document.getElementById("ExpExit").style.visibility = 'hidden';
             document.getElementById("ExpBut").style.visibility = 'visible';  
-
 
             for(let i = 0; i < names.length; i++){
                document.getElementById(names[i]).style.opacity = '45%';
