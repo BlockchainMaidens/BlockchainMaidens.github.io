@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine:200,300,400,500">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia:200,300,400,500">
 
-    <div class="wrapper"> <!-- horizontal order -->
-        </div>
+    <img src="./background.jpeg" class="wrapper"> <!-- horizontal order -->
 
         <div class="mainSection" id="mainSection">
             <h1 class="heading" id="heading">BLESSING</h1>
@@ -54,6 +53,7 @@
         </div>
 
         <div class="blessingPanel" id="blessingPanel">
+            <img class="bg" src="./background.jpeg">
             <div class="mintWrap">
                 <div class="decrease" onclick="DecreaseMintAmount()">-</div>
                 <div class="mintButton" id="mintButton" onclick="Mint()">Mint 1 NFT</div>
@@ -65,9 +65,8 @@
                 <div class="mintButton" id="burnButton" onclick="Burn()">Burn 1 NFT for 1 Points</div>
                 <div class="increase" onclick="IncreaseBurnAmount()">+</div>
             </div>
-            <div class="exit" id="exit" onclick="OpenPanel(-1)">X</div>
+            <img src="./Cross Button.jpeg" class="exit" id="exit" onclick="OpenPanel(-1)">
         </div>
-    </div>
 
     <style>
         .connect{
@@ -85,14 +84,21 @@
             margin-left: -160px;
             cursor: pointer;
 
-            border: 1px solid white;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        .bg{
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
 
         .connectText{
             font-family: Sofia;
             font-size: 2em;
             font-weight: 200;
-            color: white;
+            color: black;
 
             text-align: center;
         }
@@ -113,7 +119,7 @@
             font-family: Sofia;
             font-size: 1em;
             font-weight: 200;
-            color: white;
+            color: black;
         }
 
         .counterAmount2{
@@ -125,7 +131,7 @@
             font-family: Sofia;
             font-size: 1em;
             font-weight: 200;
-            color: white;
+            color: black;
         }
 
         .counterAmount3{
@@ -137,15 +143,13 @@
             font-family: Sofia;
             font-size: 1em;
             font-weight: 200;
-            color: white;
+            color: black;
         }
 
         .wrapper{
             position: absolute;
             width: 100%;
             height: 100%;
-
-            background-color: black;
 
             display: flex;
             align-items: center;
@@ -173,7 +177,7 @@
             font-family: Tangerine;
             font-size: 2.5em;
             font-weight: 200;
-            color: white;
+            color: black;
 
             text-align: center;
         }
@@ -212,7 +216,7 @@
             font-family: Sofia;
             font-size: 2em;
             font-weight: 200;
-            color: white;
+            color: black;
 
             text-align: right;
         }
@@ -224,7 +228,6 @@
             width: 60%;
             height: 100%;
 
-            border: 1px solid yellow;
 
             display: flex;
             align-items: center;
@@ -251,8 +254,6 @@
             width: 30%;
             height: 90%;
 
-            border: 1px solid white;
-
             display: flex;
             flex-direction: column;
             justify-content: top;
@@ -267,8 +268,6 @@
 
             width: 95%;
             height: 95%;
-
-            border: 1px solid green;
         }
 
 
@@ -297,7 +296,7 @@
             font-family: Sofia;
             font-size: 2em;
             font-weight: 200;
-            color: white;
+            color: black;
 
             text-align: center;
         }
@@ -314,8 +313,6 @@
             justify-content: center;
             align-items: center;
             flex-direction: row;
-
-            background-color: black;
         }
 
         .mintWrap{
@@ -339,7 +336,7 @@
             font-family: Sofia;
             font-size: 1em;
             font-weight: 200;
-            color: white;
+            color: black;
             text-align: center;
 
             cursor: pointer;
@@ -348,7 +345,7 @@
             justify-content: center;
             align-items: center;
 
-            border: 1px solid white;
+            border: 1px solid black;
         }
 
         .decrease{
@@ -363,7 +360,7 @@
             font-family: 'Courier New', Courier, monospace;
             font-weight: 500;
             font-size: 1.5em;
-            color: white;
+            color: black;
             text-align: center;
 
             cursor: pointer;
@@ -385,7 +382,7 @@
             font-family: 'Courier New', Courier, monospace;
             font-weight: 500;
             font-size: 1.5em;
-            color: white;
+            color: black;
             text-align: center;
 
             cursor: pointer;
@@ -401,22 +398,17 @@
             top: 50%;
             right: 5%;
 
-            margin-top: -20px;
+            margin-top: -30px;
 
-            width: 40px;
-            height: 40px;
+            width: 60px;
+            height: 60px;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
             z-index: 3;
-
-            background-color: white;
-
             cursor: pointer;
-
-            border: 1px solid orange;
         }
 
     
