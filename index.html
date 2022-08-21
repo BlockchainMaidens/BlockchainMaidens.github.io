@@ -8,6 +8,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/keccak256@latest/keccak256.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine:200,300,400,500,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia:200,300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre Baskerville:200,300,400,500">
 
     <img src="./background.jpeg" class="wrapper" id="wrapper"> <!-- horizontal order -->
 
@@ -56,26 +57,26 @@
             <img src="./background.jpeg" class="expimg">
             <div class="expwrap">
             <p class="explanationText">
-                Basics<br>
-                1) Earn Blessings from The Blockchain Maiden. <br>
+                <span class="explanationBig"><u>Basics</u></span><br> 
+                <br><span class="explanationMid">1) Earn Blessings from The Blockchain Maiden.</span> <br>
                 You can earn Blessings  by contributing, participating or engaging with The Blockchain Maiden. You will be rewarded with either Bronze, Gold or Silver depending on how well you please your Goddess. <br>
-                2) Mint them. <br>
+                <br><span class="explanationMid">2) Mint them. </span><br>
                 This can only be done during specific minting periods, which will always be made clear well before that time. The amount you are able to mint for each tier is displayed by ‘Available To Mint’ and will either be 1 or 0 for each minting period. You must be on that specific NFTs tier page to be able to mint it. For example, you must be on the Bronze Blessing page to be able to mint the Bronze NFT. <br>
-                3) Burn them for points, or sell them. <br>
+                <br><span class="explanationMid">3) Burn them for points, or sell them.</span> <br>
                 Here you have a choice to burn them for points or sell them for a profit. Points are redeemed for further offerings from The Blockchain Maiden. You can burn or sell them at any time, but once they are burned they are locked into the wallet you burned them on. Gold, Silver & Bronze Blessings are worth 4, 2 & 1 respectively. The total amount of points you have accumulated is displayed by ‘Total Collected Points’ on the Homepage. You must be on that specific NFTs tier page to be able to burn it. For example, you must be on the Bronze Blessing page to be able to burn the Bronze NFT. <br>
-                4) Redeem the points for further Blockchain Maiden offerings. <br>
+                <br><span class="explanationMid">4) Redeem the points for further Blockchain Maiden offerings.</span> <br>
                 You can redeem these points for further offerings that will be made clear and explained well in advance of the event. <br>
                 <br><br>
-                <br> Terms <br>
-                Currently Owned: The number of each tier of NFT currently held in your wallet. <br>
-                Available To Mint: The number of each tier of NFT you are able to mint during the specific minting period. It will either be 1 or 0. If you have earned Blessing NFTs on multiple wallets, then you can earn more than 1 of each in a single mint period by switching wallets. <br>
-                Previously Burned: The number of each tier of NFT you have previously burned using the current wallet. <br>
-                Total Collected Points: The total number of accumulated points acquired from burning ALL tiers of NFT within the current wallet. <br>
-                Previously Spent Points: The total number of previously redeemed points using the current wallet. <br>
+                <br> <span class="explanationBig"><u>Terms</u></span> <br>
+                <span class="explanationMid">Currently Owned:</span> The number of each tier of NFT currently held in your wallet. <br>
+                <span class="explanationMid">Available To Mint:</span> The number of each tier of NFT you are able to mint during the specific minting period. It will either be 1 or 0. If you have earned Blessing NFTs on multiple wallets, then you can earn more than 1 of each in a single mint period by switching wallets. <br>
+                <span class="explanationMid">Previously Burned:</span> The number of each tier of NFT you have previously burned using the current wallet. <br>
+                <span class="explanationMid">Total Collected Points:</span> The total number of accumulated points acquired from burning ALL tiers of NFT within the current wallet. <br>
+                <span class="explanationMid">Previously Spent Points:</span> The total number of previously redeemed points using the current wallet. <br>
                 <br><br>
-                <br>FAQ<br>
-                Q: I contributed to The Blockchain Maiden but can’t see my reward in ‘Available To Mint’. <br>
-                A: You most likely didn’t post your wallet address along with the submission. With the volume of Blessing NFTs being rewarded, it is impossible for us to chase up every contributor to get their wallet address. <br>
+                <br><span class="explanationBig"><u>FAQ</u></span><br>
+                <span class="explanationMid">Q:</span> I contributed to The Blockchain Maiden but can’t see my reward in ‘Available To Mint’. <br>
+                <span class="explanationMid">A:</span> You most likely didn’t post your wallet address along with the submission. With the volume of Blessing NFTs being rewarded, it is impossible for us to chase up every contributor to get their wallet address. <br>
                 </p>
                 </div>
         </div>
@@ -458,7 +459,7 @@
             align-items: center;
 
             font-family: Sofia;
-            font-size: 1em;
+            font-size: 1.5em;
             font-weight: 200;
             color: black;
             text-align: center;
@@ -525,18 +526,28 @@
         .explanationText{
             position: relative;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            
-
-            font-family: Sofia;
+            font-family: Libre Baskerville;
             font-size: 1.5em;
             font-weight: 200;
             color: black;
             text-align: center;
 
             z-index: 10;
+        }
+
+        .explanationBig{
+            font-family: Sofia;
+            font-size: 2em;
+            font-weight: 400;
+            color: black;
+        }
+
+        .explanationMid{
+            font-family: Sofia;
+            font-size: 1.5em;
+            font-weight: 400;
+            color: black;
+            text-align: center;
         }
 
         .expimg{
@@ -619,7 +630,10 @@
 
         var proof;
         const WL = [
-            "address"
+            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
+            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
+            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
+            "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf"
         ];
 
         const ConnectWallet = async () =>{
