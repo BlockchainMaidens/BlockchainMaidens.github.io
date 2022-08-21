@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Blockchain Maiden Mint</title>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/keccak256@latest/keccak256.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine:200,300,400,500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia:200,300,400,500">
+
+    <div class="wrapper"> <!-- horizontal order -->
+        </div>
+
+        <div class="mainSection" id="mainSection">
+            <h1 class="heading" id="heading">BLESSING</h1>
+            <div class="blessingSection" id="blessingSection">
+                <div class="counters">
+                    <h4 class="counterText" id="currOwned">Currently Owned:</h4>
+                    <h4 class="counterText" id="availableToMint">Available To Mint:</h4>
+                    <h4 class="counterText" id="prevBurned">Previously Burned:</h4>
+                </div>
+                <div class="blessings">
+                    <div class="blessingWrap" onclick="OpenPanel(1)" id="SILVER BLESSINGwrap">
+                        <img class="pillar" id="SILVER BLESSING" src="./Silver.png">
+                        <h4 class="counterAmount1" id="currSilverOwnedAmount">0</h4>
+                        <h4 class="counterAmount2" id="availSilverToMintAmount">0</h4>
+                        <h4 class="counterAmount3" id="prevSilverBurnedAmount">0</h4>
+                    </div>
+                    <div class="blessingWrap" onclick="OpenPanel(2)" id="GOLD BLESSINGwrap">
+                        <img class="pillar" id="GOLD BLESSING" src="./Gold.png">
+                        <h4 class="counterAmount1" id="currGoldOwnedAmount">0</h4>
+                        <h4 class="counterAmount2" id="availGoldToMintAmount">0</h4>
+                        <h4 class="counterAmount3" id="prevGoldBurnedAmount">0</h4>
+                    </div>
+                    <div class="blessingWrap" onclick="OpenPanel(0)" id="BRONZE BLESSINGwrap">
+                        <img class="pillar" id="BRONZE BLESSING" src="./Bronze.png">
+                        <h4 class="counterAmount1" id="currBronzeOwnedAmount">0</h4>
+                        <h4 class="counterAmount2" id="availBronzeToMintAmount">0</h4>
+                        <h4 class="counterAmount3" id="prevBronzeBurnedAmount">0</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="collectedSection" id="mainCollectedSection">
+                <h2 class="collectedText" id="collectedText">Total Collected Points:</h2>
+                <h2 class="collectedText" id="spentText">Previously Spent Points:</h2>
+            </div>
+
+            
+        </div>
+
+        <div class="explanationPanel" id="explanationPanel">
+            <p class="explanationText"> Explanation </p>
+        </div>
+
+        <div class="blessingPanel" id="blessingPanel">
+            <div class="mintWrap">
+                <div class="decrease" onclick="DecreaseMintAmount()">-</div>
+                <div class="mintButton" id="mintButton" onclick="Mint()">Mint 1 NFT</div>
+                <div class="increase" onclick="IncreaseMintAmount">+</div>
+            </div>
+            
+            <div class="mintWrap">
+                <div class="decrease" onclick="DecreaseBurnAmount()">-</div>
+                <div class="mintButton" id="burnButton" onclick="Burn()">Burn 1 NFT for 1 Points</div>
+                <div class="increase" onclick="IncreaseBurnAmount()">+</div>
+            </div>
+            <div class="exit" id="exit" onclick="OpenPanel(-1)">X</div>
+        </div>
+    </div>
+
+    <style>
+        .connect{
+            position: absolute;
+            width: 320px;
+            height: 60px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            top: 50%;
+            left: 50%;
+            margin-top: -30px;
+            margin-left: -160px;
+            cursor: pointer;
+
+            border: 1px solid white;
+        }
+
+        .connectText{
+            font-family: Sofia;
+            font-size: 2em;
+            font-weight: 200;
+            color: white;
+
+            text-align: center;
+        }
+
+        .pillar{
+            width:100%;
+            height: 100%;
+
+            opacity: 45%;
+        }
+
+        .counterAmount1{
+            position: absolute;
+
+            top: 57%;
+            left: 47.5%;
+
+            font-family: Sofia;
+            font-size: 1em;
+            font-weight: 200;
+            color: white;
+        }
+
+        .counterAmount2{
+            position: absolute;
+
+            top: 72%;
+            left: 47.5%;
+
+            font-family: Sofia;
+            font-size: 1em;
+            font-weight: 200;
+            color: white;
+        }
+
+        .counterAmount3{
+            position: absolute;
+
+            top: 87%;
+            left: 47.5%;
+
+            font-family: Sofia;
+            font-size: 1em;
+            font-weight: 200;
+            color: white;
+        }
+
+        .wrapper{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            background-color: black;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+
+            overflow: hidden;
+        }
+
+        .mainSection{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .heading{
+            position: relative;
+            width: 50%;
+            height: 75px;
+
+            font-family: Tangerine;
+            font-size: 2.5em;
+            font-weight: 200;
+            color: white;
+
+            text-align: center;
+        }
+
+        .blessingSection{
+            position: relative;
+            width: 100%;
+            height: 600px;
+            left: -7.5%;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-evenly;
+            flex-direction: row;
+        }
+
+        .counters{
+            position: relative;
+            width: 35%;
+            height: 50%;
+
+            
+
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+        }
+
+
+        .counterText{
+            position: relative;
+
+            margin-top: -10px;
+            margin-bottom: -10px;
+
+            font-family: Sofia;
+            font-size: 2em;
+            font-weight: 200;
+            color: white;
+
+            text-align: right;
+        }
+
+
+
+        .blessings{
+            position: relative;
+            width: 60%;
+            height: 100%;
+
+            border: 1px solid yellow;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row;
+        }
+
+        .blessings2{
+            position: relative;
+            width: 20%;
+            height: 600px;
+
+            border: 1px solid red;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: row;
+        }
+
+        .blessingWrap{
+            position: relative;
+            
+            width: 30%;
+            height: 90%;
+
+            border: 1px solid white;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: flex-end;
+            
+
+            cursor: pointer;
+        }
+
+        .currWrap{
+            position: relative;
+
+            width: 95%;
+            height: 95%;
+
+            border: 1px solid green;
+        }
+
+
+
+
+        .collectedSection{
+            position: relative;
+            width: 75%;
+            height: 10%;
+
+            margin-top: 25px;
+
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .collectedText{
+            position: relative;
+
+            height: 45%;
+            margin-top: -10px;
+            margin-bottom: -10px;
+
+            font-family: Sofia;
+            font-size: 2em;
+            font-weight: 200;
+            color: white;
+
+            text-align: center;
+        }
+
+        .blessingPanel{
+            visibility: hidden;
+            position: absolute;
+
+            width: 100%;
+            height: 12.5%;
+            bottom: 0%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+            background-color: black;
+        }
+
+        .mintWrap{
+            position: relative;
+
+            width: 400px;
+            height: 50px;
+
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .mintButton{
+            position: relative;
+
+            width: 250px;
+            height: 50px;
+
+            font-family: Sofia;
+            font-size: 1em;
+            font-weight: 200;
+            color: white;
+            text-align: center;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 1px solid white;
+        }
+
+        .decrease{
+            position: relative;
+
+            width: 50px;
+            height: 50px;
+
+            margin-left: 5px;
+            margin-right: 5px;
+
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+            font-size: 1.5em;
+            color: white;
+            text-align: center;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .increase{
+            position: relative;
+
+            width: 50px;
+            height: 50px;
+
+            margin-left: 5px;
+            margin-right: 5px;
+
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 500;
+            font-size: 1.5em;
+            color: white;
+            text-align: center;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .exit{
+            position: absolute;
+
+            top: 50%;
+            right: 5%;
+
+            margin-top: -20px;
+
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 3;
+
+            background-color: white;
+
+            cursor: pointer;
+
+            border: 1px solid orange;
+        }
+
+    
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var account;
+
+        const address = "";
+        const ABI = [];
+        var contract = null;
+
+        var currentTier = 0; // 0 to 2
+
+        var maxMints = [];
+        var currMints = [1, 1, 1];
+        var currBurns = [1, 1, 1];
+        var names = ["BRONZE BLESSING", "SILVER BLESSING", "GOLD BLESSING"];
+
+        //counter system
+        var availableToMint = [];
+        var amountBurned = [];
+        var owned = [];
+
+        var pointsPerId = [1, 2, 4];
+        var pointBalance = 0;
+        var pointsSpent = 0;
+
+
+        var isWL = false;
+        var isPub = false;
+
+        var proof;
+        const WL = [
+            "address"
+        ];
+
+        const ConnectWallet = async () =>{
+            if(window.ethereum){
+            //await window.ethereum.send('eth_requestAccounts');
+			await ethereum.request({method: "eth_requestAccounts"});
+            window.web3 = new Web3(window.ethereum);
+
+            var accounts = await web3.eth.getAccounts();
+            account = accounts[0];
+
+            contract = new web3.eth.Contract(abi, address);
+
+            document.getElementById("connect").style.visibility = 'hidden';
+            document.getElementById("mainSection").style.visibility = 'visible';
+
+            let x = await loadData();
+            }
+        }
+
+        const loadData = async () =>{
+            maxMints = await contract.methods.MAX_MINTS().call({from: account});
+            pointBalance = await contract.methods.pointBalance(account).call({from: account});
+            pointsSpent = await contract.methods.previousSpentPoints(account).call({from: account});
+            isWL = await contract.methods.isWhiteListSale().call({from: account});
+            isPub = await contract.methods.isPublicSale().call({from: account});
+
+
+            for(let i = 0; i < 3; i++){
+                availableToMint[i] = await contract.methods.availableToMint(i).call({from: account});
+                amountBurned[i] = await contract.methods.totalBurned(i).call({from: account});
+                owned[i] = await contract.methods.totalOwned(i).call({from: account});
+                pointsPerId[i] = await contract.method.pointsPerId(i).call({from: account});
+            }
+
+            Initialise();
+        }
+
+        const Initialise = () =>{
+            const bronzes = [document.getElementById("currBronzeOwnedAmount"), document.getElementById("availBronzeToMintAmount"), document.getElementById("prevBronzeBurnedAmount")];
+            const silvers = [document.getElementById("currSilverOwnedAmount"), document.getElementById("availSilverToMintAmount"), document.getElementById("prevSilverBurnedAmount")];
+            const golds = [document.getElementById("currGoldOwnedAmount"), document.getElementById("availGoldToMintAmount"), document.getElementById("prevGoldBurnedAmount")];
+
+            bronzes[0].textContent = owned[0];
+            bronzes[1].textContent = availableToMint[0];
+            bronzes[2].textContent = amountBurned[0];
+
+            silvers[0].textContent = owned[1];
+            silvers[1].textContent = availableToMint[1];
+            silvers[2].textContent = amountBurned[1];
+
+            golds[0].textContent = owned[2];
+            golds[1].textContent = availableToMint[2];
+            golds[2].textContent = amountBurned[2];
+
+            document.getElementById("collectedText").textContent = "Total Collected Points: " + pointBalance.toString();
+            document.getElementById("spentText").textContent = "Previously Spent Points: " + pointsSpent.toString();
+        }
+
+        const IncreaseMintAmount = () =>{
+            if(currMints[currentTier] < availableToMint[currentTier]){
+            currMints[currentTier]++;
+            SetMintButtonText();
+            }
+        }
+
+        const DecreaseMintAmount = () =>{
+            if(currMints[currentTier] <= 1){
+                return;
+            }
+            currMints[currentTier]--;
+            SetMintButtonText();
+        }
+
+        const IncreaseBurnAmount = () =>{
+            if(currBurns[currentTier] < owned[currentTier]){
+            currBurns[currentTier]++;
+            SetBurnButtonText();
+            }
+        }
+
+        const DecreaseBurnAmount = () =>{
+            if(currBurns[currentTier] <= 1){
+                return;
+            }
+            currBurns[currentTier]--;
+            SetBurnButtonText();
+        }
+
+        const Mint = async () =>{
+            let mints = currMints[currentTier];
+
+            if(isWL){
+                findMerkleProof();
+                await contract.methods.whitelistMint(mints, proof, currentTier).send({from: account, value: 0}).then((result) =>{
+                    owned[currentTier] += mints;
+                    availableToMint[currentTier] -= mints;
+                    currMints[currentTier] = 0;
+                    OpenPanel(currentTier);
+                });
+            }
+            else{
+                await contract.methods.publicMint(mints, currentTier).send({from: account, value: 0}).then((result) =>{
+                    owned[currentTier] += mints;
+                    availableToMint[currentTier] -= mints;
+                    currMints[currentTier] = 0;
+                    OpenPanel(currentTier);
+                });
+            }
+        }
+
+        const Burn = async () =>{
+            await contract.methods.burnToken(account, currentTier, currBurns[currentTier]).then((result) =>{
+                owned[currentTier] -= currBurns[currentTier];
+                pointBalance += pointsPerId[currentTier];
+                currBurns[currentTier] = 0;
+                OpenPanel(currentTier);
+            });
+        }
+
+        const findMerkleProof = () =>{
+            const leaves = WL.map(x => keccak256(x));
+		    const tree = new MerkleTree(leaves, keccak256, {sortPairs: true});
+		    const buf2hex = x => '0x' + x.toString('hex');
+
+		    console.log(buf2hex(tree.getRoot()));
+		
+		    const leaf = keccak256(account);
+		    proof = tree.getProof(leaf).map(x => buf2hex(x.data));
+        }
+        
+        const OpenPanel = (newTier) =>{
+            currentTier = newTier;
+            
+            if(newTier > -1 && newTier < 3){
+            document.getElementById("blessingPanel").style.visibility = 'visible';
+            
+            for(let i = 0; i < names.length; i++){
+               document.getElementById(names[i]).style.opacity = '45%';
+            }
+
+            document.getElementById(names[newTier]).style.opacity = '80%';
+
+            SetMintButtonText();
+            SetBurnButtonText();
+            }
+            if(newTier < 0){
+            document.getElementById("blessingPanel").style.visibility = 'hidden';
+            document.getElementById("explanationPanel").style.visibility = 'hidden';
+
+            for(let i = 0; i < names.length; i++){
+               document.getElementById(names[i]).style.opacity = '45%';
+            }
+            }
+            if(newTier > 2){
+            document.getElementById("explanationPanel").style.visibility = 'visible';
+            document.getElementById("blessingPanel").style.visibility = 'hidden';
+            }
+        }
+
+        const SetMintButtonText = () =>{
+            document.getElementById("mintButton").textContent = `MINT ${currMints[currentTier]} ${names[currentTier]}`;
+        }
+
+        const SetBurnButtonText = () =>{
+            document.getElementById("burnButton").textContent = `BURN ${currBurns[currentTier]} ${names[currentTier]} FOR ${pointsPerId[currentTier]} POINTS`;
+        }
+    </script>
+</body>
