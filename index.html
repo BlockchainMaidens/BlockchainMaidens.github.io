@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head> <!-- working -->
     <meta charset="utf-8">
     <title>Blockchain Maiden Mint</title>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
@@ -732,34 +732,38 @@
 
         const Mint = async () =>{
             let mints = currMints[currentTier];
+            let currTier = currentTier;
 
             if(isWL){
                 findMerkleProof();
-                await contract.methods.whitelistMint(mints, proof, currentTier).send({from: account, value: 0}).then((result) =>{
-                    owned[currentTier] += mints;
-                    availableToMint[currentTier] -= mints;
-                    currMints[currentTier] = 0;
-                    OpenPanel(currentTier);
+                await contract.methods.whitelistMint(mints, proof, currTier).send({from: account, value: 0}).then((result) =>{
+                    owned[currTier] += mints;
+                    availableToMint[currTier] -= mints;
+                    currMints[currTier] = 0;
+                    OpenPanel(currTier);
                     Initialise();
                 });
             }
             else{
-                await contract.methods.publicMint(mints, currentTier).send({from: account, value: 0}).then((result) =>{
-                    owned[currentTier] += mints;
-                    availableToMint[currentTier] -= mints;
-                    currMints[currentTier] = 0;
-                    OpenPanel(currentTier);
+                await contract.methods.publicMint(mints, currTier).send({from: account, value: 0}).then((result) =>{
+                    owned[currTier] += mints;
+                    availableToMint[currTier] -= mints;
+                    currMints[currTier] = 0;
+                    OpenPanel(currTier);
                     Initialise();
                 });
             }
         }
 
         const Burn = async () =>{
-            await contract.methods.burnToken(account, currentTier, currBurns[currentTier]).send({from: account, value: 0}).then((result) =>{
-                owned[currentTier] -= currBurns[currentTier];
-                pointBalance += pointsPerId[currentTier];
-                currBurns[currentTier] = 0;
-                OpenPanel(currentTier);
+            let currTier = currentTier;
+            await contract.methods.burnToken(account, currTier, currBurns[currTier]).send({from: account, value: 0}).then((result) =>{
+                owned[currTier] -= currBurns[currTier];
+                let point = parseInt(pointBalance);
+                pointBalance = point + pointsPerId[currTier];
+                amountBurned[currTier] += 1;
+                currBurns[currTier] = 0;
+                OpenPanel(currTier);
                 Initialise();
             });
         }
