@@ -89,7 +89,7 @@
             <div class="mintWrap">
                 <div class="decrease" onclick="DecreaseMintAmount()">-</div>
                 <div class="mintButton" id="mintButton" onclick="Mint()">Mint 1 NFT</div>
-                <div class="increase" onclick="IncreaseMintAmount">+</div>
+                <div class="increase" onclick="IncreaseMintAmount()">+</div>
             </div>
             
             <div class="mintWrap">
@@ -740,7 +740,7 @@
                     availableToMint[currentTier] -= mints;
                     currMints[currentTier] = 0;
                     OpenPanel(currentTier);
-			Initialise();
+                    Initialise();
                 });
             }
             else{
@@ -749,18 +749,18 @@
                     availableToMint[currentTier] -= mints;
                     currMints[currentTier] = 0;
                     OpenPanel(currentTier);
-			Initialise();
+                    Initialise();
                 });
             }
         }
 
         const Burn = async () =>{
-            await contract.methods.burnToken(account, currentTier, currBurns[currentTier]).then((result) =>{
+            await contract.methods.burnToken(account, currentTier, currBurns[currentTier]).send({from: account, value: 0}).then((result) =>{
                 owned[currentTier] -= currBurns[currentTier];
                 pointBalance += pointsPerId[currentTier];
                 currBurns[currentTier] = 0;
                 OpenPanel(currentTier);
-		    Initialise();
+                Initialise();
             });
         }
 
