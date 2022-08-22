@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre Baskerville:200,300,400,500">
 
     <img src="./background.jpeg" class="wrapper" id="wrapper"> <!-- horizontal order -->
+        <div class="connect" id="connect" onclick="ConnectWallet()"> 
+            <h1 class="connectText">CONNECT</h1>
+        </div>
 
         <div class="mainSection" id="mainSection">
             
             <div class="ExplanationButton" id="ExpBut" onclick="OpenPanel(3)">Explanation</div>
             <img src="./Cross Button.jpeg" class="ExplanationExit" id="ExpExit" onclick="OpenPanel(-1)">
 
-            <h1 class="heading" id="heading">BLESSING</h1>
+            <h1 class="heading" id="heading">BLESSING NFT</h1>
             <div class="blessingSection" id="blessingSection">
                 <div class="counters">
                     <h4 class="counterText" id="currOwned">Currently Owned:</h4>
@@ -203,6 +206,8 @@
             display: flex;
             align-items: center;
             flex-direction: column;
+
+            visibility:hidden;
         }
 
         .heading{
@@ -524,8 +529,8 @@
         }
 
         .explanationText{
+            width: 95%;
             position: relative;
-		width: 95%;
 
             font-family: Libre Baskerville;
             font-size: 1.5em;
@@ -537,14 +542,14 @@
         }
 
         .explanationBig{
-            font-family: Tangerine;
+            font-family: fantasy;
             font-size: 2em;
             font-weight: 400;
             color: black;
         }
 
         .explanationMid{
-            font-family: Tangerine;
+            font-family: Sofia;
             font-size: 1.5em;
             font-weight: 400;
             color: black;
@@ -605,21 +610,21 @@
     <script type="text/javascript">
         var account;
 
-        const address = "";
-        const ABI = [];
+        const address = "0x4186d633B0678755B2d7873ca098D660f10Ed7aF";
+        const ABI = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"account","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"indexed":false,"internalType":"uint256[]","name":"values","type":"uint256[]"}],"name":"TransferBatch","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"id","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"TransferSingle","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"string","name":"value","type":"string"},{"indexed":true,"internalType":"uint256","name":"id","type":"uint256"}],"name":"URI","type":"event"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"MAX_MINTS","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"MAX_SUPPLY","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"WLMerkleRoots","outputs":[{"internalType":"bytes32","name":"","type":"bytes32"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"_numberBurned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"_numberMinted","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"contractAddress","type":"address"}],"name":"addOperatorContract","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"approvedContractsToOperate","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"availableToMint","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address[]","name":"accounts","type":"address[]"},{"internalType":"uint256[]","name":"ids","type":"uint256[]"}],"name":"balanceOfBatch","outputs":[{"internalType":"uint256[]","name":"","type":"uint256[]"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnToken","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bronze","type":"uint256"},{"internalType":"uint256","name":"silver","type":"uint256"},{"internalType":"uint256","name":"gold","type":"uint256"}],"name":"changeMintAmounts","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bronze","type":"uint256"},{"internalType":"uint256","name":"silver","type":"uint256"},{"internalType":"uint256","name":"gold","type":"uint256"}],"name":"changePointAmount","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"cutSupply","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"bronze","type":"uint256"},{"internalType":"uint256","name":"silver","type":"uint256"},{"internalType":"uint256","name":"gold","type":"uint256"}],"name":"increaseSupply","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isPublicSale","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"isWhiteListSale","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"ownerMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"pointBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"pointsPerId","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"previousSpentPoints","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"publicMint","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"reset","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256[]","name":"ids","type":"uint256[]"},{"internalType":"uint256[]","name":"amounts","type":"uint256[]"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeBatchTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"uint256","name":"amount","type":"uint256"},{"internalType":"bytes","name":"data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"newURI","type":"string"}],"name":"setBaseURI","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"shouldStartPublicSale","type":"bool"}],"name":"setPublicSale","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bool","name":"shouldStartWhiteListSale","type":"bool"}],"name":"setWhiteListSale","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes32","name":"bronze","type":"bytes32"},{"internalType":"bytes32","name":"silver","type":"bytes32"},{"internalType":"bytes32","name":"gold","type":"bytes32"}],"name":"setWhitelistRoots","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"spendPoints","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"totalBurned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"id","type":"uint256"}],"name":"totalOwned","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"uri","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"quantity","type":"uint256"},{"internalType":"bytes32[]","name":"proof","type":"bytes32[]"},{"internalType":"uint256","name":"id","type":"uint256"}],"name":"whitelistMint","outputs":[],"stateMutability":"nonpayable","type":"function"}];
         var contract = null;
 
         var currentTier = 0; // 0 to 2
 
-        var maxMints = [];
+        var maxMints = [1, 1, 1];
         var currMints = [1, 1, 1];
         var currBurns = [1, 1, 1];
         var names = ["BRONZE BLESSING", "SILVER BLESSING", "GOLD BLESSING"];
 
         //counter system
-        var availableToMint = [];
-        var amountBurned = [];
-        var owned = [];
+        var availableToMint = [0, 0, 0];
+        var amountBurned = [0, 0, 0];
+        var owned = [0, 0, 0];
 
         var pointsPerId = [1, 2, 4];
         var pointBalance = 0;
@@ -646,7 +651,7 @@
             var accounts = await web3.eth.getAccounts();
             account = accounts[0];
 
-            contract = new web3.eth.Contract(abi, address);
+            contract = new web3.eth.Contract(ABI, address);
 
             document.getElementById("connect").style.visibility = 'hidden';
             document.getElementById("mainSection").style.visibility = 'visible';
@@ -656,7 +661,7 @@
         }
 
         const loadData = async () =>{
-            maxMints = await contract.methods.MAX_MINTS().call({from: account});
+            
             pointBalance = await contract.methods.pointBalance(account).call({from: account});
             pointsSpent = await contract.methods.previousSpentPoints(account).call({from: account});
             isWL = await contract.methods.isWhiteListSale().call({from: account});
@@ -664,10 +669,11 @@
 
 
             for(let i = 0; i < 3; i++){
-                availableToMint[i] = await contract.methods.availableToMint(i).call({from: account});
-                amountBurned[i] = await contract.methods.totalBurned(i).call({from: account});
-                owned[i] = await contract.methods.totalOwned(i).call({from: account});
-                pointsPerId[i] = await contract.method.pointsPerId(i).call({from: account});
+                maxMints[i] = parseInt(await contract.methods.MAX_MINTS(i).call({from: account}));
+                availableToMint[i] = parseInt(await contract.methods.availableToMint(i).call({from: account}));
+                amountBurned[i] = parseInt(await contract.methods.totalBurned(i).call({from: account}));
+                owned[i] = parseInt(await contract.methods.totalOwned(i).call({from: account}));
+                pointsPerId[i] = parseInt(await contract.methods.pointsPerId(i).call({from: account}));
             }
 
             Initialise();
