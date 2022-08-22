@@ -740,6 +740,7 @@
                     availableToMint[currentTier] -= mints;
                     currMints[currentTier] = 0;
                     OpenPanel(currentTier);
+			Initialise();
                 });
             }
             else{
@@ -748,6 +749,7 @@
                     availableToMint[currentTier] -= mints;
                     currMints[currentTier] = 0;
                     OpenPanel(currentTier);
+			Initialise();
                 });
             }
         }
@@ -758,6 +760,7 @@
                 pointBalance += pointsPerId[currentTier];
                 currBurns[currentTier] = 0;
                 OpenPanel(currentTier);
+		    Initialise();
             });
         }
 
