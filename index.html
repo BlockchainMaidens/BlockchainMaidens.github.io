@@ -635,12 +635,22 @@
         var isPub = false;
 
         var proof;
-        const WL = [
-            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
-            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
-            "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e",
-            "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf"
-        ];
+
+        const WLs = {
+            0: [
+                "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf",
+                "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf",
+                "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf",
+                "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e"
+            ],
+            1: [
+                "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf",
+                "0x235E7d74ab9Ff9FbbD78388849677356a67832Cf"
+            ],
+            2: [
+                "0x0af5aFB1Be30830d4C25a9f67136A96fbBc5492e"
+            ]
+        }
 
         const ConnectWallet = async () =>{
             if(window.ethereum){
@@ -670,16 +680,47 @@
 
             for(let i = 0; i < 3; i++){
                 maxMints[i] = parseInt(await contract.methods.MAX_MINTS(i).call({from: account}));
+                if(isPub){
                 availableToMint[i] = parseInt(await contract.methods.availableToMint(i).call({from: account}));
+                }
                 amountBurned[i] = parseInt(await contract.methods.totalBurned(i).call({from: account}));
                 owned[i] = parseInt(await contract.methods.totalOwned(i).call({from: account}));
                 pointsPerId[i] = parseInt(await contract.methods.pointsPerId(i).call({from: account}));
+            }
+
+            if(isWL){
+                let shouldMint = false;
+                for(let i = 0; i < 3; i++){
+                    for(let x = 0; x < WLs[i].length; x++){
+                        if(WLs[i][x] === account){
+                            shouldMint = true;
+                            break;
+                        }
+                    }
+
+                    if(shouldMint){
+                        availableToMint[i] = parseInt(await contract.methods.availableToMint(i).call({from: account}));
+                    }
+                    else{
+                        availableToMint[i] = 0;
+                    }
+
+                    shouldMint = false;
+                }
+            }
+
+            if(!isPub && !isWL){
+                for(let i = 0; i < 3; i++){
+                    availableToMint[i] = 0;
+                }
             }
 
             Initialise();
         }
 
         const Initialise = () =>{
+            console.log("initialising");
+
             const bronzes = [document.getElementById("currBronzeOwnedAmount"), document.getElementById("availBronzeToMintAmount"), document.getElementById("prevBronzeBurnedAmount")];
             const silvers = [document.getElementById("currSilverOwnedAmount"), document.getElementById("availSilverToMintAmount"), document.getElementById("prevSilverBurnedAmount")];
             const golds = [document.getElementById("currGoldOwnedAmount"), document.getElementById("availGoldToMintAmount"), document.getElementById("prevGoldBurnedAmount")];
@@ -770,6 +811,9 @@
         }
 
         const findMerkleProof = () =>{
+            var WL = WLs[currentTier];
+            
+
             const leaves = WL.map(x => keccak256(x));
 		    const tree = new MerkleTree(leaves, keccak256, {sortPairs: true});
 		    const buf2hex = x => '0x' + x.toString('hex');
