@@ -11,9 +11,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre Baskerville:200,300,400,500">
 
     <img src="./background.jpeg" class="wrapper" id="wrapper"> <!-- horizontal order -->
-        <div class="connect" id="connect" onclick="ConnectWallet()"> 
+    
+    <div class="border">
+        <img src="./blessinghouse.png" class="borderImg2">
+        <img src="./blessingborder.png" class="borderImg">
+    </div>
+    
+    <div class="connect" id="connect" onclick="ConnectWallet()"> 
             <h1 class="connectText">CONNECT</h1>
-        </div>
+    </div>
 
         <div class="mainSection" id="mainSection">
             
@@ -126,6 +132,31 @@
             height: 100%;
         }
 
+        .border{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content:space-between;
+            flex-direction: column;
+
+            overflow: hidden;
+        }
+
+        .borderImg{
+            position: relative;
+            width: 100%;
+            height: 80%;
+        }
+
+        .borderImg2{
+            position: relative;
+            width: 90%;
+            height: 20%;
+        }
+
 
         .connectText{
             font-family: Sofia;
@@ -217,9 +248,11 @@
             margin-block-end: 0em;
 
             font-family: Tangerine;
-            font-size: 5em;
+            font-size: 4.25em;
             font-weight: 700;
             color: black;
+            
+            top: 5%;
 
             text-align: center;
         }
@@ -229,6 +262,8 @@
             width: 100%;
             height: 75%;
             left: -7.5%;
+
+            top: 10%;
 
             display: flex;
             align-items: flex-end;
@@ -240,6 +275,8 @@
             position: relative;
             width: 35%;
             height: 50%;
+            
+            left: 7%;
 
             
 
