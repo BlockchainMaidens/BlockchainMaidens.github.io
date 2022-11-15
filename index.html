@@ -12,9 +12,18 @@
 
     <img src="./background.jpeg" class="wrapper" id="wrapper"> <!-- horizontal order -->
     
+
     <div class="border">
         <img src="./blessinghouse.png" class="borderImg2">
         <img src="./blessingborder.png" class="borderImg">
+    </div>
+
+    <div class="tabiconWrapper">
+        <img class="icon" src="icon1.jpeg">
+        <img class="icon" src="icon2.jpg">
+        <img class="icon" src="icon3.jpeg">
+        <img class="icon" src="icon4.jpeg">
+        <img class="icon5" src="icon5.png">
     </div>
     
     <div class="connect" id="connect" onclick="ConnectWallet()"> 
@@ -130,6 +139,45 @@
             position: absolute;
             width: 100%;
             height: 100%;
+        }
+
+        .tabiconWrapper{
+            position: absolute;
+            width: 99.5%;
+            height: 10%;
+
+            display: flex;
+            justify-content: right;
+            align-items: center;
+        }
+
+        .icon{
+            position: relative;
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 25px;
+            border: 1px solid white;
+
+            margin-right: 10px;
+            margin-left: 10px;
+
+            cursor: pointer;
+        }
+
+        .icon5{
+            position: relative;
+
+            width: 125px;
+            height: 125px;
+
+            margin-top: 25px;
+
+            margin-right: 10px;
+            margin-left: -30px;
+
+            cursor: pointer;
         }
 
         .border{
